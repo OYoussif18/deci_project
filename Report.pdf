@@ -1,0 +1,132 @@
+Twitter Dog Ratings Analysis Report
+Author: Omar Mohammed
+
+1. Introduction
+This report analyzes Twitter data containing dog images, user ratings, and engagement metrics (likes, retweets). The goal was to:
+
+Identify the most common dog breeds posted on Twitter.
+
+Examine the relationship between dog ratings and tweet popularity.
+
+Determine which breeds received the highest ratings.
+
+Analyze engagement trends over time.
+
+2. Data Sources & Methodology
+Data Collection
+Tweet JSON Data (tweet-json.txt):
+
+Contains tweet text, timestamps, favorites, and retweets.
+
+Ratings extracted using regex (e.g., "13/10").
+
+Image Predictions (image-predictions.tsv):
+
+Contains AI-predicted dog breeds and confidence scores.
+
+Data Cleaning & Processing
+Merged datasets on tweet ID.
+
+Filtered for:
+
+Only high-confidence dog predictions (p1_dog = True, p1_conf > 0.2).
+
+Removed duplicates and missing values.
+
+Final dataset columns:
+
+created_at (tweet date)
+
+Dog_name (predicted breed)
+
+rating (user-assigned score)
+
+favorite_count (likes)
+
+retweet_count (shares)
+
+3. Key Findings
+3.1 Most Common Dog Breeds
+The top 3 predicted breeds were:
+
+Golden Retriever (most frequent)
+
+Labrador Retriever
+
+Pembroke (Welsh Corgi)
+
+Implication: These breeds are likely the most popular or recognizable on social media.
+
+3.2 Ratings vs. Engagement
+Weak positive correlation (0.3) between rating and retweet_count.
+
+Interpretation: Higher-rated dogs tend to get slightly more shares, but other factors (image quality, humor, timing) may play a bigger role.
+
+3.3 Highest-Rated Dogs
+Maximum rating: 14/10 (exceeds the usual 10/10 scale, suggesting humorous exaggeration).
+
+Top breeds at 14/10:
+
+Golden Retriever
+
+Pembroke
+
+Insight: Users may be more inclined to "overrate" certain breeds as a joke.
+
+3.4 Engagement Trends Over Time
+Highest retweets: 2016
+
+Decline in 2017
+
+Lowest in 2015
+
+Possible reasons:
+
+Algorithm changes on Twitter.
+
+Shifts in user behavior.
+
+Seasonal trends (e.g., fewer dog posts in winter).
+
+4. Visualizations
+Retweet Counts by Year
+(Bar chart showing engagement trends from 2015–2017)
+
+Observation:
+
+2016 had peak engagement, suggesting optimal posting conditions that year.
+
+5. Conclusions & Recommendations
+Conclusions
+Golden Retrievers dominate Twitter dog posts, followed by Labs and Pembrokes.
+
+Ratings weakly predict engagement—other factors likely matter more.
+
+Users exaggerate ratings for humor (e.g., 14/10).
+
+Engagement peaked in 2016, then declined.
+
+Recommendations
+✅ For dog accounts: Post Golden Retrievers, Labs, or Pembrokes for higher visibility.
+✅ For viral potential: Combine high ratings with funny captions.
+✅ Timing matters: Analyze why 2016 performed best—was it a trend, algorithm change, or seasonal effect?
+
+6. Limitations & Next Steps
+Limitations
+Small dataset (only a few years of tweets).
+
+AI breed predictions may have errors.
+
+No text analysis (captions could influence engagement).
+
+Future Work
+Expand dataset to include more recent tweets.
+
+Analyze tweet text for keywords/humor.
+
+Compare with non-dog tweets to see if trends are unique to pet content.
+
+7. Dataset Availability
+The cleaned dataset (twitter_archive_master.csv) is available for further analysis.
+
+End of Report
