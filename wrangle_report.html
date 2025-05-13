@@ -1,0 +1,43 @@
+Introduction
+The objective of this project was to gather, assess, clean, and merge data from multiple sources related to tweets by the popular Twitter account @WeRateDogs. This account rates and comments on photos of dogs, often humorously. The goal was to wrangle this data into a single clean dataset and make it suitable for further analysis of breed popularity, tweet engagement, and rating trends.
+
+1. Data Gathering
+Three separate data sources were collected:
+
+Twitter Archive Enhanced: A CSV file (twitter-archive-enhanced.csv) containing tweet IDs, timestamps, and dog ratings.
+
+Image Prediction File: A TSV file (image-predictions.tsv) obtained via an HTTP request. It contains the top predicted breed for each dog image, along with the prediction confidence and whether the object is a dog.
+
+Tweet Statistics: A JSON file (tweet-json.txt) containing tweet-level data such as retweet and favorite counts, obtained through Twitter’s API.
+
+All datasets were loaded using pandas, and appropriate separators and flags (lines=True) were used to ensure proper formatting.
+
+2. Data Assessment
+Each dataset was assessed both visually and programmatically. The process involved examining the data types, identifying missing values, and checking for duplicates or inconsistent entries.
+
+The df_predictions file had some predictions with p1_conf values greater than 1, which is invalid since confidence should be between 0 and 1.
+
+Some predictions were not about dogs (e.g., inanimate objects or other animals), which needed to be filtered out.
+
+The df_enhanced file had some inflated ratings (e.g., ratings over 100) which skewed the data.
+
+Several columns across datasets were unnecessary for analysis and were dropped to tidy the structure.
+
+3. Data Cleaning
+Cleaning the data addressed both quality and tidiness issues:
+
+For quality, we dropped all duplicate rows and rows with missing essential data (e.g., null tweet IDs or missing predictions).
+
+We filtered image predictions to keep only high-confidence predictions (p1_conf > 0.2) and where the prediction was confirmed to be a dog (p1_dog == True).
+
+The rating_numerator was capped at 10 to remove unrealistic ratings and outliers.
+
+For tidiness, we renamed columns and merged the datasets using consistent tweet IDs. We also converted the timestamp column to a proper datetime format with timezone awareness (datetime64[ns, UTC]).
+
+4. Storing Cleaned Data
+The three datasets were merged into a single master dataset using tweet IDs. The final columns included the dog breed prediction (Dog_name), tweet rating, timestamp, and tweet popularity metrics (retweet_count and favorite_count). Unnecessary columns such as duplicate IDs and less confident predictions were dropped.
+
+The clean dataset was saved as twitter_archive_master.csv, ready for exploratory data analysis and visualization.
+
+Conclusion
+This wrangling process ensured a clean, reliable dataset by addressing missing, invalid, or inconsistent entries and reshaping the data for easy analysis. The final dataset integrates visual recognition with Twitter metadata and engagement stats, offering valuable insights into trends and patterns related to dog ratings on social media.
