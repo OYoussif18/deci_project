@@ -1,34 +1,52 @@
-Introduction
-The cleaned dataset from the @WeRateDogs Twitter archive provides a unique opportunity to explore public engagement with tweets about dogs. We aimed to identify popular breeds, engagement trends, and the correlation between ratings and tweet popularity.
+<!DOCTYPE html>
+<html>
+<head>
+  <title>act_report</title>
+</head>
+<body>
+  <h1>Analyzing @WeRateDogs Tweets</h1>
 
-Key Insights
-1. Most Common Dog Breeds
-The most frequently predicted dog breed was the Golden Retriever, followed by Labrador Retriever and Pembroke. This shows that certain breeds tend to dominate Twitter discussions.
+  <h2>Introduction</h2>
+  <p>
+    This report summarizes key findings from the cleaned dataset of tweets from the popular @WeRateDogs Twitter account. The project involved gathering data from multiple sources, cleaning and merging it into a single dataset, and analyzing the content for trends and insights. The final dataset combines tweet metadata, image classification predictions, and tweet-level engagement metrics (retweets and favorites).
+  </p>
 
-df['Dog_name'].value_counts()
+  <h2>Key Insights</h2>
 
-Visualization: Top 5 Dog Breeds by Count
+  <h3>1. Most Common Dog Breeds</h3>
+  <p>
+    The most frequently predicted dog breed in the dataset is the <strong>Golden Retriever</strong>, followed by the Labrador Retriever and Pembroke. These breeds dominate the dataset, likely due to their popularity and the way they’re featured in user-submitted photos.
+  </p>
 
-top_5 = df['Dog_name'].value_counts().head(5)
-top_5.plot(kind='bar')
-2. Tweet Engagement Over Time
-We observed that 2016 had the highest retweet count, followed by 2017. 2015 had the lowest, likely due to fewer tweets or a smaller audience base at the time.
+  <h3>2. Top-Rated Breeds</h3>
+  <p>
+    When filtering for dogs that received the maximum rating of 10, Golden Retrievers and Pembrokes again topped the list. This shows a correlation between breed popularity and high user ratings. These breeds are not only the most common but also the most appreciated by the community.
+  </p>
 
-Visualization: Retweet Count by Year
+  <h3>3. Tweet Engagement Over Time</h3>
+  <p>
+    The number of retweets and favorites peaked in <strong>2016</strong>, with a visible decline in later years. This could be attributed to the account’s viral growth during 2016 or changes in Twitter’s algorithm. Early tweets generally received lower engagement, which aligns with the smaller audience size during that time.
+  </p>
 
-plt.bar(df['timestamp'].dt.year, df['retweet_count'])
+  <h3>4. Rating vs Retweet Correlation</h3>
+  <p>
+    A correlation analysis showed a mild positive relationship (~0.3) between a dog’s rating and the number of retweets it received. While higher ratings can increase visibility, they are not the sole factor in determining a tweet’s popularity.
+  </p>
 
-3. Rating vs. Popularity
-We found a mild positive correlation (0.3) between a dog’s rating and the number of retweets. While higher-rated dogs tend to get more attention, the correlation is not strong enough to be conclusive.
+  <h2>Visualizations</h2>
 
-df['rating'].corr(df['retweet_count'])  # Result: ~0.3
+  <h3>Top 5 Dog Breeds by Frequency</h3>
+  <p>The bar chart below displays the five most commonly predicted breeds:</p>
+  <img src="top_5_breeds.png" alt="Top 5 Dog Breeds" width="500">
 
-4. Top-Rated Breeds
-We filtered for dogs with the highest rating (10) and found that Golden Retrievers and Pembrokes were the most common among the top-rated group. This suggests these breeds are not just popular but also highly rated.
+  <h3>Retweets by Year</h3>
+  <p>The following chart illustrates average retweet counts per year, showing peak activity in 2016:</p>
+  <img src="retweets_by_year.png" alt="Retweet Count by Year" width="500">
 
-top_rated = df[df['rating'] == df['rating'].max()]
-top_rated['Dog_name'].value_counts()
+  <h2>Conclusion</h2>
+  <p>
+    The cleaned dataset from @WeRateDogs reveals trends in dog breed popularity, user ratings, and engagement over time. Golden Retrievers and Pembrokes not only appear most frequently but also receive the highest ratings. While high ratings tend to correlate with more retweets, other factors also play a role. These insights show how humor, breed recognition, and timing contribute to viral content.
+  </p>
 
-Conclusion
-This analysis confirms that breed recognition and rating influence engagement on Twitter, albeit to a limited extent. Golden Retrievers lead in popularity, but Pembrokes are often top-rated. By merging image data, tweet metadata, and statistics, we uncovered patterns that help explain how people engage with content about dogs.
-
+</body>
+</html>
